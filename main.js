@@ -49,18 +49,17 @@ function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const members = message.channel.members;
-		const memberNames = members.values();
+		members.forEach(value, key, map) {
+			console.log("key:", key, "value:", value);
+		}
 
-		console.log(memberNames);
-
-
-		// const member = message.mentions.members.first();
-		// console.log("username:", member.username, '\n\n\n');
-		// console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
-		// console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
-		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		// const mockedMessage = spongeCase(lastMessage);
-		// message.channel.send(mockedMessage);
+		const member = message.mentions.members.first();
+		console.log("username:", member.username, '\n\n\n');
+		console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
+		console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
+		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+		const mockedMessage = spongeCase(lastMessage);
+		message.channel.send(mockedMessage);
 	}
 
 }
