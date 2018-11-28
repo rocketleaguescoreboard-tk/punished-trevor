@@ -50,7 +50,9 @@ function mock(message) {
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const id = message.mentions.users.first().id;
 		message.channel.fetchMessages({ limit: 10 })
-			.then(messages => console.log(messages))
+			.then(lastMessages => {
+				console.log(lastMessages.values().author.values().id);
+			})
 			.catch(console.error);
 		// console.log("lastMessage.content", lastMessage, '\n\n\n');
 		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
