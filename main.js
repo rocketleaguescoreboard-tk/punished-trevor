@@ -18,11 +18,13 @@ function mock(message) {
 
 	if (message.content.startsWith('mock')) {
 		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		console.log(message.mentions.users);
-		const user = message.mentions.users.id;
-		console.log(user);
+		const users = message.mentions.users;
+		const user = Object.keys(users)[0];
+		console.log(user, '\n\n\n');
+		const id = user.id;
+		console.log(id, '\n\n\n');
 		const lastMessage = message.channel.fetchMessage(user);
-		console.log(lastMessage);
+		console.log(lastMessage, '\n\n\n');
 		const mockedMessage = spongeCase(lastMessage);
 		message.channel.send(mockedMessage);
 	}
@@ -31,8 +33,10 @@ function mock(message) {
 
 function utOgh(message) {
 
-	if (message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i) && !message.author.bot) {
-		const str = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i)[0].toUpperCase();
+	const match = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
+
+	if (match && !message.author.bot) {
+		const str = match[0].toUpperCase();
 		const us = str.match(/U/g).join('').length;
 		const os = str.match(/O/g).join('').length;
 		
