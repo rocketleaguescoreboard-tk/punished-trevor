@@ -5,6 +5,8 @@ client.on('message', message => {
 
 	const uo = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
 
+	console.log(message.author.bot);
+
 	if (uo && message.author.bot) {
 		const s = uo[0].toUpperCase();
 		const us = uo[0].match(/u/ig).join('').length;
