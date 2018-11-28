@@ -5,35 +5,17 @@ client.login(process.env.BOT_TOKEN);
 client.on('message', message => {
 
 	utOgh(message);
-
-	mock(message);
-
-	if (message.content === 'mimic my idiot self') {
-		message.channel.send('miMiC mY iDiOt sELf');
-	}
+	mimic(message);
+	mock(message);	
 
 });
 
-function mock(message) {
-
-	if (message.content.startsWith('mock')) {
-		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		console.log(message.mentions);
-		console.log(message.mentions.users);
-		const user = message.mentions.users[0].id;
-		console.log(user);
-		const lastMessage = message.channel.fetchMessage(user);
-		console.log(lastMessage);
-		const mockedMessage = spongeCase(lastMessage);
-		message.channel.send(mockedMessage);
-	}
-
-}
-
 function utOgh(message) {
 
-	if (message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i) && !message.author.bot) {
-		const str = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i)[0].toUpperCase();
+	const match = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
+
+	if (match && !message.author.bot) {
+		const str = match[0].toUpperCase();
 		const us = str.match(/U/g).join('').length;
 		const os = str.match(/O/g).join('').length;
 		
@@ -54,3 +36,33 @@ function utOgh(message) {
 	}
 
 }
+
+function mimic(message) {
+
+	if (message.content === 'mimic my idiot self') {
+		message.channel.send('miMiC mY iDiOt sELf');
+	}
+
+}
+
+function mock(message) {
+
+	if (message.content.startsWith('mock') && message.mentions.users.size > 0) {
+		const id = message.mentions.users.first().id;
+		message.channel.fetchMessages().then(lastMessages => {
+			lastMessages = Array.from(lastMessages.values());
+			for (let i = 0; i < lastMessages.length; i++) {
+				if (id === lastMessages[i].author.id) {
+					const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+					const mockedMessage = spongeCase(lastMessages[i].content);
+					message.channel.send(mockedMessage);
+					break;
+				}
+			}
+		})
+		.catch(console.error);
+	}
+
+}
+
+// https://discordapp.com/oauth2/authorize?client_id=510803012445274112&scope=bot&permissions=515136&response_type=code
