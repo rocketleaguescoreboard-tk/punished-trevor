@@ -19,11 +19,11 @@ function mock(message) {
 	if (message.content.startsWith('mock')) {
 		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
 		const users = message.mentions.users.entries();
-		const user = Array.from(users);
+		// const user = users[0];
 		console.log('\n\n\n');
-		console.log(users);
+		console.log(users[0]);
 		console.log('\n\n\n');
-		console.log(user);
+		console.log(users[1]);
 		console.log('\n\n\n');
 		const id = user.id;
 		console.log('id', id);
