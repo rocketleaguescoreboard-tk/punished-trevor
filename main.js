@@ -5,32 +5,10 @@ client.login(process.env.BOT_TOKEN);
 client.on('message', message => {
 
 	utOgh(message);
-
-	mock(message);
-
-	if (message.content === 'mimic my idiot self') {
-		message.channel.send('miMiC mY iDiOt sELf');
-	}
+	mimic(message);
+	mock(message);	
 
 });
-
-function mock(message) {
-
-	if (message.content.startsWith('mock')) {
-		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		const member = message.mentions.members.first();
-		const id = member.id;
-		// channel.fetchMessage('99539446449315840')
-		// 	.then(lastMessage => console.log(lastMessage.content))
-		// 	.catch(console.error);
-		console.log("username:", member.username, '\n\n\n');
-		console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
-		console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
-		const mockedMessage = spongeCase(lastMessage);
-		message.channel.send(mockedMessage);
-	}
-
-}
 
 function utOgh(message) {
 
@@ -55,6 +33,34 @@ function utOgh(message) {
 		result = `***${result}***`;
 
 		message.channel.send(result);
+	}
+
+}
+
+function mimic(message) {
+
+	if (message.content === 'mimic my idiot self') {
+		message.channel.send('miMiC mY iDiOt sELf');
+	}
+
+}
+
+function mock(message) {
+
+	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
+		const members = message.channel.members;
+		const memberNames = members.values();
+
+		console.log(memberNames);
+
+
+		// const member = message.mentions.members.first();
+		// console.log("username:", member.username, '\n\n\n');
+		// console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
+		// console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
+		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+		// const mockedMessage = spongeCase(lastMessage);
+		// message.channel.send(mockedMessage);
 	}
 
 }
