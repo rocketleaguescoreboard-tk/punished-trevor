@@ -2,7 +2,13 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('message', message => {
-	const uo = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
+
+	console.log("Sending message from:", message.author);
+
+	if (message.author !== 'Punished Trevor') {
+		const uo = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
+	}
+
 	if (uo) {
 		const s = uo[0].toUpperCase();
 		const us = uo[0].match(/u/ig).join('').length;
@@ -23,6 +29,7 @@ client.on('message', message => {
 
 		message.channel.send(result);
 	}
+
 });
 
 client.login(process.env.BOT_TOKEN);
