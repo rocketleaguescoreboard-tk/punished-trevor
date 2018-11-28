@@ -52,10 +52,11 @@ function mock(message) {
 		message.channel.fetchMessages({ limit: 20 })
 			.then(lastMessages => {
 				Array.from(lastMessages.values()).forEach(lastMessage => {
-					console.log("\n\n");
+					console.log("\n");
+					console.log("user id:", lastMessage.author.id);
 					console.log("message id:", lastMessage.id);
 					console.log("content:", lastMessage.content);
-					console.log("\n\n");
+					console.log("\n");
 				})
 			})
 			.catch(console.error);
