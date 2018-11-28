@@ -1,14 +1,22 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+client.login(process.env.BOT_TOKEN);
 
 client.on('message', message => {
 
-	const uo = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i);
+	utOgh(message);
 
-	if (uo && !message.author.bot) {
-		const s = uo[0].toUpperCase();
-		const us = uo[0].match(/u/ig).join('').length;
-		const os = uo[0].match(/o/ig).join('').length;
+	if (message.content === 'mimic my idiot self') {
+		message.channel.send('miMiC mY iDiOt sELf');
+	}
+
+});
+
+function utOgh (message) {
+	if (message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i) && !message.author.bot) {
+		const s = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i)[0].toUpperCase();
+		const us = s.match(/U/g).join('').length;
+		const os = s.match(/O/g).join('').length;
 		
 		let result = '';
 		[...new Set(s)].forEach(v => {
@@ -25,7 +33,4 @@ client.on('message', message => {
 
 		message.channel.send(result);
 	}
-
-});
-
-client.login(process.env.BOT_TOKEN);
+}
