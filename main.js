@@ -21,7 +21,7 @@ function mock(message) {
 		const users = message.mentions.users;
 		console.log('users:', users);
 		console.log('\n\n\n');
-		const id = users.firstKey;
+		const id = users.firstKey();
 		console.log('id:', id);
 		console.log('\n\n\n');
 		const lastMessage = message.channel.fetchMessage(user);
