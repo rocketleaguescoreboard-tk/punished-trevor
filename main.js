@@ -48,12 +48,14 @@ function mimic(message) {
 function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
-		console.log(message.mentions.users.first());
-		const lastMessage = message.mentions.users.first().lastMessage.content;
-		console.log("lastMessage.content", lastMessage, '\n\n\n');
-		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		const mockedMessage = spongeCase(lastMessage);
-		message.channel.send(mockedMessage);
+		const id = message.mentions.users.first().id;
+		message.channel.fetchMessages({ limit: 10 })
+			.then(messages => console.log(messages))
+			.catch(console.error);
+		// console.log("lastMessage.content", lastMessage, '\n\n\n');
+		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+		// const mockedMessage = spongeCase(lastMessage);
+		// message.channel.send(mockedMessage);
 	}
 
 }
