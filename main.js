@@ -24,6 +24,8 @@ function mock(message) {
 		console.log(user);
 		console.log('\n\n\n');
 		const id = user.id;
+		console.log('id', id);
+		console.log('\n\n\n');
 		const lastMessage = message.channel.fetchMessage(user);
 		console.log(lastMessage, '\n\n\n');
 		const mockedMessage = spongeCase(lastMessage);
