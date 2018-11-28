@@ -49,14 +49,14 @@ function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const id = message.mentions.users.first().id;
-		message.channel.fetchMessages({ limit: 3 })
+		message.channel.fetchMessages({ limit: 20 })
 			.then(lastMessages => {
 				lastMessages.values().forEach(lastMessage => {
 					console.log("\n\n");
 					console.log("message id:", lastMessage.id);
 					console.log("content:", lastMessage.content);
 					console.log("\n\n");
-				});
+				})
 			})
 			.catch(console.error);
 		// console.log("lastMessage.content", lastMessage, '\n\n\n');
