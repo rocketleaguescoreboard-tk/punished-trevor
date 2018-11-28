@@ -19,10 +19,11 @@ function mock(message) {
 	if (message.content.startsWith('mock')) {
 		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
 		const users = message.mentions.users;
-		const user = users.entries()[0];
-		console.log(user, '\n\n\n');
+		const user = users.entries();
+		console.log('\n\n\n');
+		console.log(user);
+		console.log('\n\n\n');
 		const id = user.id;
-		console.log(id, '\n\n\n');
 		const lastMessage = message.channel.fetchMessage(user);
 		console.log(lastMessage, '\n\n\n');
 		const mockedMessage = spongeCase(lastMessage);
