@@ -6,21 +6,40 @@ client.on('message', message => {
 
 	utOgh(message);
 
+	mock(message);
+
 	if (message.content === 'mimic my idiot self') {
 		message.channel.send('miMiC mY iDiOt sELf');
 	}
 
 });
 
-function utOgh (message) {
+function mock(message) {
+
+	if (message.content.startsWith('mock')) {
+		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+		console.log(message.mentions);
+		console.log(message.mentions.users);
+		const user = message.mentions.users[0].id;
+		console.log(user);
+		const lastMessage = message.channel.fetchMessage(user);
+		console.log(lastMessage);
+		const mockedMessage = spongeCase(lastMessage);
+		message.channel.send(mockedMessage);
+	}
+
+}
+
+function utOgh(message) {
+
 	if (message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i) && !message.author.bot) {
-		const s = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i)[0].toUpperCase();
-		const us = s.match(/U/g).join('').length;
-		const os = s.match(/O/g).join('').length;
+		const str = message.content.match(/u+\s*t+\s*o+\s*g+\s*h+/i)[0].toUpperCase();
+		const us = str.match(/U/g).join('').length;
+		const os = str.match(/O/g).join('').length;
 		
 		let result = '';
-		[...new Set(s)].forEach(v => {
-			result += s.match(new RegExp(v, 'ig')).join('');
+		[...new Set(str)].forEach(v => {
+			result += str.match(new RegExp(v, 'ig')).join('');
 			if (v === 'U') {
 				while (result.length < us * 2) result += v;
 			}
@@ -33,4 +52,5 @@ function utOgh (message) {
 
 		message.channel.send(result);
 	}
+
 }
