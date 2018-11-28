@@ -20,8 +20,8 @@ function mock(message) {
 		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
 		const user = message.mentions.users.first();
 		console.log(user, '\n\n\n');
-		const userName = user.userName;
-		console.log("userName:", user.lastMessage, '\n\n\n');
+		const userName = user.username;
+		console.log("username:", user.username, '\n\n\n');
 		console.log("lastMessageID:", user.lastMessageID, '\n\n\n');
 		console.log("lastMessage.content", user.lastMessage.content, '\n\n\n');
 		const mockedMessage = spongeCase(lastMessage);
