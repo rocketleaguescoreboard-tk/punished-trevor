@@ -51,7 +51,12 @@ function mock(message) {
 		const id = message.mentions.users.first().id;
 		message.channel.fetchMessages({ limit: 3 })
 			.then(lastMessages => {
-				console.log(lastMessages.values());
+				lastMessages.values().forEach(lastMessage => {
+					console.log("\n\n");
+					console.log("message id:", lastMessage.id);
+					console.log("content:", lastMessage.content);
+					console.log("\n\n");
+				});
 			})
 			.catch(console.error);
 		// console.log("lastMessage.content", lastMessage, '\n\n\n');
