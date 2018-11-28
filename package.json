@@ -1,0 +1,22 @@
+{
+  "name": "punished-trevor",
+  "version": "1.0.0",
+  "description": "This is a Discord bot that says \"ut ogh\" instead of \"uh oh\".",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifreann/punished-trevor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifreann/punished-trevor/issues"
+  },
+  "homepage": "https://github.com/ifreann/punished-trevor#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
