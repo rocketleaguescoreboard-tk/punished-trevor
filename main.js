@@ -48,18 +48,13 @@ function mimic(message) {
 function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
-		const members = message.channel.members;
-
-		const logMapElements = (value, key) => console.log("key:", key, "value:", value.lastMessageID);
-		members.forEach(logMapElements);
-
-		// const member = message.mentions.members.first();
-		// console.log("username:", member.username, '\n\n\n');
-		// console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
-		// console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
-		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		// const mockedMessage = spongeCase(lastMessage);
-		// message.channel.send(mockedMessage);
+		const lastMessage = message.mentions.users.first().lastMessage.content;
+		console.log("lastMessage.content", lastMessage, '\n\n\n');
+		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+		const mockedMessage = spongeCase(lastMessage);
+		message.channel.send(mockedMessage);
 	}
 
 }
+
+// https://discordapp.com/oauth2/authorize?client_id=510803012445274112&scope=bot&permissions=515136&response_type=code
