@@ -50,7 +50,7 @@ function mock(message) {
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const members = message.channel.members;
 
-		const logMapElements = (value, key) => console.log("key:", key, "value:", value);
+		const logMapElements = (value, key) => console.log("key:", key, "value:", value.lastMessageID);
 		members.forEach(logMapElements);
 
 		// const member = message.mentions.members.first();
