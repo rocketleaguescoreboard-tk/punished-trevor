@@ -18,12 +18,14 @@ function mock(message) {
 
 	if (message.content.startsWith('mock')) {
 		const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		const user = message.mentions.users.first();
-		console.log(user, '\n\n\n');
-		const userName = user.username;
-		console.log("username:", user.username, '\n\n\n');
-		console.log("lastMessageID:", user.lastMessageID, '\n\n\n');
-		console.log("lastMessage.content", user.lastMessage.content, '\n\n\n');
+		const member = message.mentions.members.first();
+		const id = user.id;
+		// channel.fetchMessage('99539446449315840')
+		// 	.then(lastMessage => console.log(lastMessage.content))
+		// 	.catch(console.error);
+		console.log("username:", member.username, '\n\n\n');
+		console.log("lastMessageID:", member.lastMessageID, '\n\n\n');
+		console.log("lastMessage.content", member.lastMessage.content, '\n\n\n');
 		const mockedMessage = spongeCase(lastMessage);
 		message.channel.send(mockedMessage);
 	}
