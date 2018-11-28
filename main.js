@@ -49,9 +49,9 @@ function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const members = message.channel.members;
-		members.forEach(value, key, map) {
-			console.log("key:", key, "value:", value);
-		}
+
+		const logMapElements = (value, key) => console.log("key:", key, "value:", value);
+		members.forEach(logMapElements);
 
 		const member = message.mentions.members.first();
 		console.log("username:", member.username, '\n\n\n');
