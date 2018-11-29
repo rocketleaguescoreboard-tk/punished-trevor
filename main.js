@@ -47,7 +47,9 @@ function mimic(message) {
 
 function mock(message) {
 
-	if (message.content.startsWith('mock')) {
+	console.log(message.mentions);
+	console.log(message.mentions.USER_PATTERN);
+	if (message.content.startsWith('mock') && message.mentions.USER_PATTERN) {
 		const id = message.mentions.users.first().id;
 		message.channel.fetchMessages().then(lastMessages => {
 			lastMessages = Array.from(lastMessages.values());
