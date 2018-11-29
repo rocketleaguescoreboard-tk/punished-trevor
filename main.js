@@ -17,13 +17,13 @@ function acknowledge(message) {
 	const badMatch = message.content.match(/\bbad\s*bot\b/i);
 
 	if (goodMatch && !message.author.bot) {
-		// todo: thank the human
+		message.channel.send(`thank you ${message.author.username} :^)`);
 	}
 	else if (badMatch && !message.author.bot) {
-		// todo: flame the human
+		message.channel.send('rude :(');
 	}
 	else if (goodMatch && badMatch && !message.author.bot) {
-		// todo: flame Chris for trying to break my bot
+		message.channel.send('not today *bucko*');
 	}
 
 }
@@ -66,14 +66,14 @@ function mimic(message) {
 function mock(message) {
 
 	// only I may dance :^)
-	if (message.author.username !== "Darren") return;
+	// if (message.author.username !== "Darren") return;
 
 	// if you type "mock" and don't @ anyone:
 	if (message.content.match(/^mock$/i) && !message.author.bot) {
 		message.channel.fetchMessages({ limit: 2 })
 		.then(lastMessages => {
 			const lastMessage = lastMessages.last().content;
-			const mockedMessage = spongeCase(lastMessage);
+			const mockedMessage = `*${addOs(spongeCase(lastMessage))}*`;
 			message.channel.send(mockedMessage);
 		})
 		.catch(console.error);
@@ -87,7 +87,7 @@ function mock(message) {
 			lastMessages = Array.from(lastMessages.values());
 			for (let i = 0; i < lastMessages.length; i++) {
 				if (id === lastMessages[i].author.id) {
-					const mockedMessage = spongeCase(lastMessages[i].content);
+					const mockedMessage = `*${addOs(spongeCase(lastMessages[i].content))}*`;
 					message.channel.send(mockedMessage);
 					break;
 				}
