@@ -16,14 +16,14 @@ function acknowledge(message) {
 	const goodMatch = message.content.match(/\bgood\s*bot\b/i);
 	const badMatch = message.content.match(/\bbad\s*bot\b/i);
 
-	if (goodMatch && !message.author.bot) {
+	if (goodMatch && badMatch && !message.author.bot) {
+		message.channel.send('not today *bucko*');
+	}
+	else if (goodMatch && !message.author.bot) {
 		message.channel.send(`thank you ${message.author.username} :^)`);
 	}
 	else if (badMatch && !message.author.bot) {
 		message.channel.send('rude :(');
-	}
-	else if (goodMatch && badMatch && !message.author.bot) {
-		message.channel.send('not today *bucko*');
 	}
 
 }
