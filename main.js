@@ -4,25 +4,76 @@ client.login(process.env.BOT_TOKEN);
 
 client.on('message', message => {
 
-	utOgh(message);
-	mimic(message);
-	mock(message);
-	acknowledge(message);
-	
+	// only I may dance :^)
+	if (message.author.username !== "Darren") return;
+
+	// if someone says 'ut ogh' then say 'ut ogh' right back:
+	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i && !message.author.bot)) {
+		utOgh(message);
+	}
+	// mimic placeholder:
+	else if (message.content === 'mimic my idiot self') {
+		mimic(message);
+	}
+	// if you type "mock" and don't @ anyone:
+	else if (message.content.match(/^mock$/i) && !message.author.bot) {
+		mockLast(message);
+	}
+	// if you type "mock" and @ someone:
+	else if (message.content.match(/^mock/i) && message.mentions.users.size > 0 && !message.author.bot) {
+		mockUser(message);
+	}
+	// if you say 'good bot' or 'bad bot':
+	else if (message.content.match(/\b(good|bad)\s*bot\b/i)) {
+		acceptCriticism(message);
+	}
+
 });
 
-function acknowledge(message) {
+function mockLast(message) {
 
-	const goodMatch = message.content.match(/\bgood\s*bot\b/i);
-	const badMatch = message.content.match(/\bbad\s*bot\b/i);
+	message.channel.fetchMessages({ limit: 2 })
+	.then(lastMessages => {
+		const lastMessage = lastMessages.last().content;
+		if (!lastMessage) return;
+		const mockedMessage = addOs(spongeCase(lastMessage));
+		message.channel.send(mockedMessage);
+	})
+	.catch(console.error);
 
-	if (goodMatch && badMatch && !message.author.bot) {
+}
+
+function mockUser(message) {	
+
+	const id = message.mentions.users.first().id;
+
+	message.channel.fetchMessages({ limit: 20 })
+	.then(lastMessages => {
+		lastMessages = Array.from(lastMessages.values());
+		for (let i = 0; i < lastMessages.length; i++) {
+			if (id === lastMessages[i].author.id) {
+				if (!lastMessages[i].content) return;
+				const mockedMessage = addOs(spongeCase(lastMessages[i].content));
+				message.channel.send(mockedMessage);
+				break;
+			}
+		}
+	})
+	.catch(console.error);
+
+}
+
+function acceptCriticism(message) {
+
+	const matches = message.content.match(/\b(good|bad)\s*bot\b/gi);
+
+	if (matches.includes('good bot') && matches.includes('bad bot') && !message.author.bot) {
 		message.channel.send('not today *bucko*');
 	}
-	else if (goodMatch && !message.author.bot) {
-		message.channel.send(`thank you ${message.author.username} :^)`);
+	else if (matches.includes('good bot') && !message.author.bot) {
+		message.channel.send(`thank you ${message.author.tag} :^)`);
 	}
-	else if (badMatch && !message.author.bot) {
+	else if (matches.includes('bad bot') && !message.author.bot) {
 		message.channel.send('rude :(');
 	}
 
@@ -31,74 +82,35 @@ function acknowledge(message) {
 function utOgh(message) {
 
 	const match = message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i);
+	const str = match[0].toUpperCase();
+	const us = str.match(/U/g).join('').length;
+	const os = str.match(/O/g).join('').length;
 
-	if (match && !message.author.bot) {
-		const str = match[0].toUpperCase();
-		const us = str.match(/U/g).join('').length;
-		const os = str.match(/O/g).join('').length;
+	let result = '';
+	[...new Set(str)].forEach(v => {
+		result += str.match(new RegExp(v, 'ig')).join('');
+		if (v === 'U') {
+			while (result.length < us * 2) result += v;
+		}
+		if (v === 'O') {
+			const lengthSoFar = result.length;
+			while (result.length - lengthSoFar < os * 2) result += v;
+		}
+	});
+	result = `***${result}***`;
 
-		let result = '';
-		[...new Set(str)].forEach(v => {
-			result += str.match(new RegExp(v, 'ig')).join('');
-			if (v === 'U') {
-				while (result.length < us * 2) result += v;
-			}
-			if (v === 'O') {
-				const lengthSoFar = result.length;
-				while (result.length - lengthSoFar < os * 2) result += v;
-			}
-		});
-		result = `***${result}***`;
-
-		message.channel.send(result);
-	}
+	message.channel.send(result);
 
 }
 
 function mimic(message) {
 
-	if (message.content === 'mimic my idiot self') {
-		message.channel.send('miMiC mY iDiOt sELf');
-	}
+	// placeholder
+	message.channel.send('miMiC mY iDiOt sElF');
 
 }
 
-function mock(message) {
-
-	// only I may dance :^)
-	// if (message.author.username !== "Darren") return;
-
-	// if you type "mock" and don't @ anyone:
-	if (message.content.match(/^mock$/i) && !message.author.bot) {
-		message.channel.fetchMessages({ limit: 2 })
-		.then(lastMessages => {
-			const lastMessage = lastMessages.last().content;
-			const mockedMessage = addOs(spongeCase(lastMessage));
-			message.channel.send(mockedMessage);
-		})
-		.catch(console.error);
-	}
-
-	// if you type "mock" and @ someone:
-	if (message.content.match(/^mock/i) && message.mentions.users.size > 0 && !message.author.bot) {
-		const id = message.mentions.users.first().id;
-		message.channel.fetchMessages({ limit: 20 })
-		.then(lastMessages => {
-			lastMessages = Array.from(lastMessages.values());
-			for (let i = 0; i < lastMessages.length; i++) {
-				if (id === lastMessages[i].author.id) {
-					const mockedMessage = addOs(spongeCase(lastMessages[i].content));
-					message.channel.send(mockedMessage);
-					break;
-				}
-			}
-		})
-		.catch(console.error);
-	}
-
-}
-
-// transform a string into either sPoNgEbObCaSe or SpOnGeBoBcAsE
+// transform a string into sPoNgEbObCaSe
 function spongeCase(str) {
 
 	const r = Math.floor(Math.random() * 2);
@@ -115,12 +127,12 @@ function spongeCase(str) {
 // randomly add a random number of randomly capitalized O's to a string
 function addOs(str) {
 
-	const addChance = 20;
-	const minOs = 2;
+	const addChance = 50;
+	const minOs = 3;
 	const maxOs = 10;
 
 	// decide whether to add them or not. Probability expressed as percentage by addChance
-	if (Math.floor(Math.random() * 100 / addChance) + 1 !== 100 / addChance) {
+	if (Math.floor(Math.random() * 100 / addChance) + 1 !== Math.floor(100 / addChance)) {
 		return str;
 	}
 	
