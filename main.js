@@ -49,21 +49,18 @@ function mock(message) {
 
 	if (message.content.startsWith('mock') && message.author.username === 'Darren') {
 		const id = message.mentions.users.first().id;
-		message.channel.fetchMessages({ limit: 20 })
-			.then(lastMessages => {
-				Array.from(lastMessages.values()).forEach(lastMessage => {
-					console.log("\n");
-					console.log("user id:", lastMessage.author.id);
-					console.log("message id:", lastMessage.id);
-					console.log("content:", lastMessage.content);
-					console.log("\n");
-				})
-			})
-			.catch(console.error);
-		// console.log("lastMessage.content", lastMessage, '\n\n\n');
-		// const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
-		// const mockedMessage = spongeCase(lastMessage);
-		// message.channel.send(mockedMessage);
+		message.channel.fetchMessages().then(lastMessages => {
+			lastMessages = Array.from(lastMessages.values());
+			for (let i = 0; i < lastMessages.length; i++) {
+				if (id === lastMessages[i].author.id) {
+					const spongeCase = s => s.toLowerCase().split('').map((v, i) => i % 2 === 0 ? v : v.toUpperCase()).join('');
+					const mockedMessage = spongeCase(lastMessages[i].content);
+					message.channel.send(mockedMessage);
+					break;
+				}
+			}
+		})
+		.catch(console.error);
 	}
 
 }
