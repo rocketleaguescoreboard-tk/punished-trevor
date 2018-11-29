@@ -5,7 +5,7 @@ client.login(process.env.BOT_TOKEN);
 client.on('message', message => {
 
 	// only I may dance :^)
-	if (message.author.username !== "Darren") return;
+	// if (message.author.username !== "Darren") return;
 
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
 	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i) && !message.author.bot) {
