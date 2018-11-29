@@ -73,7 +73,7 @@ function mock(message) {
 		message.channel.fetchMessages({ limit: 2 })
 		.then(lastMessages => {
 			const lastMessage = lastMessages.last().content;
-			const mockedMessage = `*${addOs(spongeCase(lastMessage))}*`;
+			const mockedMessage = addOs(spongeCase(lastMessage));
 			message.channel.send(mockedMessage);
 		})
 		.catch(console.error);
@@ -87,7 +87,7 @@ function mock(message) {
 			lastMessages = Array.from(lastMessages.values());
 			for (let i = 0; i < lastMessages.length; i++) {
 				if (id === lastMessages[i].author.id) {
-					const mockedMessage = `*${addOs(spongeCase(lastMessages[i].content))}*`;
+					const mockedMessage = addOs(spongeCase(lastMessages[i].content));
 					message.channel.send(mockedMessage);
 					break;
 				}
