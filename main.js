@@ -8,7 +8,7 @@ client.on('message', message => {
 	if (message.author.username !== "Darren") return;
 
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
-	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i && !message.author.bot)) {
+	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i) && !message.author.bot) {
 		utOgh(message);
 	}
 	// mimic placeholder:
