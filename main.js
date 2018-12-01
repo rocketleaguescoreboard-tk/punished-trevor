@@ -5,22 +5,29 @@ client.login(process.env.BOT_TOKEN);
 client.on('message', message => {
 
 	// only I may dance :^)
-	// if (message.author.username !== "Darren") return;
+	// if (message.author.username !== 'Darren') return;
+
+	// ignore Trevor
+	if (message.author.bot) return;
 
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
-	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i) && !message.author.bot) {
+	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i)) {
 		utOgh(message);
 	}
-	// mimic placeholder:
-	else if (message.content === 'mimic my idiot self') {
+	// if you type 
+	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {                         // TODO : UNFUCK ALL THIS
 		mimic(message);
 	}
-	// if you type "mock" and don't @ anyone:
-	else if (message.content.match(/^mock$/i) && !message.author.bot) {
+	// if you type 
+	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {
+		mimicUser(message);
+	}
+	// if you type 'mock' and don't @ anyone:
+	else if (message.content.match(/^mock$/i)) {
 		mockLast(message);
 	}
-	// if you type "mock" and @ someone:
-	else if (message.content.match(/^mock/i) && message.mentions.users.size > 0 && !message.author.bot) {
+	// if you type 'mock' and @ someone:
+	else if (message.content.match(/^mock/i) && message.mentions.users.size > 0) {
 		mockUser(message);
 	}
 	// if you say 'good bot' or 'bad bot':
@@ -29,6 +36,13 @@ client.on('message', message => {
 	}
 
 });
+
+function mimic(message) {
+
+	// placeholder
+	message.channel.send('miMiC mY iDiOt sElF');
+
+}
 
 function mockLast(message) {
 
@@ -67,15 +81,15 @@ function acceptCriticism(message) {
 
 	const content = message.content;
 
-	if (content.match(/\bgood\s*bot\b/i) && content.match(/\bbad\s*bot\b/i) && !message.author.bot) {
+	if (content.match(/\bgood\s*bot\b/i) && content.match(/\bbad\s*bot\b/i)) {
 		message.channel.send('not today *bucko*');
 	}
-	else if (content.match(/\bgood\s*bot\b/i) && !message.author.bot) {
+	else if (content.match(/\bgood\s*bot\b/i)) {
 		message.react('❤');
 		message.channel.send(`thank you ${message.member.displayName} :^)`);
 	}
-	else if (content.match(/\bbad\s*bot\b/i) && !message.author.bot) {
-		message.react('👀');
+	else if (content.match(/\bbad\s*bot\b/i)) {
+		message.react('🆔 🇮 🇴 🇹');
 	}
 
 }
@@ -101,13 +115,6 @@ function utOgh(message) {
 	result = `***${result}***`;
 
 	message.channel.send(result);
-
-}
-
-function mimic(message) {
-
-	// placeholder
-	message.channel.send('miMiC mY iDiOt sElF');
 
 }
 
