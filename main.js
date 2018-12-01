@@ -89,7 +89,10 @@ function acceptCriticism(message) {
 		message.channel.send(`thank you ${message.member.displayName} :^)`);
 	}
 	else if (content.match(/\bbad\s*bot\b/i)) {
-		message.react('🆔 🇮 🇴 🇹');
+		message.react('🆔');
+		message.react('🇮');
+		message.react('🇴');
+		message.react('🇹');
 	}
 
 }
