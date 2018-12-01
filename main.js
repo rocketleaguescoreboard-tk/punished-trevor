@@ -65,16 +65,17 @@ function mockUser(message) {
 
 function acceptCriticism(message) {
 
-	const matches = message.content.match(/\b(good|bad)\s*bot\b/gi);
+	const content = message.content;
 
-	if (matches.includes('good bot') && matches.includes('bad bot') && !message.author.bot) {
+	if (content.match(/\bgood\s*bot\b/i) && content.match(/\bbad\s*bot\b/i) && !message.author.bot) {
 		message.channel.send('not today *bucko*');
 	}
-	else if (matches.includes('good bot') && !message.author.bot) {
-		message.channel.send(`thank you ${message.author.tag} :^)`);
+	else if (content.match(/\bgood\s*bot\b/i) && !message.author.bot) {
+		message.react('❤');
+		message.channel.send(`thank you ${message.member.displayName} :^)`);
 	}
-	else if (matches.includes('bad bot') && !message.author.bot) {
-		message.channel.send('rude :(');
+	else if (content.match(/\bbad\s*bot\b/i) && !message.author.bot) {
+		message.react('👀');
 	}
 
 }
