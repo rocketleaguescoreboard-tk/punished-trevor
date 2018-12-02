@@ -45,6 +45,19 @@ client.on('message', message => {
 
 });
 
+function clean(text) {
+
+	if (typeof text === "string") {
+		return text
+			.replace(/`/g, "`" + String.fromCharCode(8203))
+			.replace(/@/g, "@" + String.fromCharCode(8203));
+	}
+	else {
+		return text;
+	}
+	
+}
+
 function evaluate(message) {
 
 	const args = message.content.split(" ").slice(1);
@@ -57,17 +70,6 @@ function evaluate(message) {
 	}
 	catch (err) {
 		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-	}
-
-	function clean(text) {
-		if (typeof text === "string") {
-			return text
-				.replace(/`/g, "`" + String.fromCharCode(8203))
-				.replace(/@/g, "@" + String.fromCharCode(8203));
-		}
-		else {
-			return text;
-		}
 	}
 
 }
