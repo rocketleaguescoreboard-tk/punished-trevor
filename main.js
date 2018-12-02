@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
+const util = require('util');
 const client = new Discord.Client();
 client.login(process.env.BOT_TOKEN);
 
 client.on("error", e => console.error(e));
 client.on("warn", e => console.warn(e));
-client.on("debug", e => console.info(e));
 
 client.on('message', message => {
 
@@ -55,18 +55,27 @@ function clean(text) {
 	else {
 		return text;
 	}
-	
+
 }
 
 function evaluate(message) {
 
 	const args = message.content.split(" ").slice(1);
+	const isPromise = p => p.then ? true : false;
 
 	try {
 		const code = args.join(" ");
 		let evaled = eval(code);
-		if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
-		message.channel.send(clean(evaled), { code: "xl" });
+		if (isPromise(evaled)) {
+			evaled.then(evaledPromise => {
+				if (typeof evaledPromise !== "string") evaledPromise = util.inspect(evaledPromise);
+				message.channel.send(clean(evaledPromise), { code: "xl" });
+			});
+		}
+		else {
+			if (typeof evaled !== "string") evaled = util.inspect(evaled);
+			message.channel.send(clean(evaled), { code: "xl" });
+		}		
 	}
 	catch (err) {
 		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
