@@ -15,7 +15,7 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	// run js with !e
-	if (message.content.startsWith("!e") && message.author.username === 'Darren') {
+	if (message.content.startsWith("!e") && (message.author.username === 'Darren' || message.author.username === 'Hectik')) {
 		evaluate(message);
 	}
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
@@ -45,19 +45,6 @@ client.on('message', message => {
 
 });
 
-function clean(text) {
-
-	if (typeof text === "string") {
-		return text
-			.replace(/`/g, "`" + String.fromCharCode(8203))
-			.replace(/@/g, "@" + String.fromCharCode(8203));
-	}
-	else {
-		return text;
-	}
-
-}
-
 function evaluate(message) {
 
 	const args = message.content.split(" ").slice(1);
@@ -79,6 +66,17 @@ function evaluate(message) {
 	}
 	catch (err) {
 		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+	}
+
+	function clean(text) {
+		if (typeof text === "string") {
+			return text
+				.replace(/`/g, "`" + String.fromCharCode(8203))
+				.replace(/@/g, "@" + String.fromCharCode(8203));
+		}
+		else {
+			return text;
+		}
 	}
 
 }
