@@ -2,6 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.login(process.env.BOT_TOKEN);
 
+client.on("error", e => console.error(e));
+client.on("warn", e => console.warn(e));
+client.on("debug", e => console.info(e));
+
 client.on('message', message => {
 
 	// only I may dance :^)
@@ -10,12 +14,16 @@ client.on('message', message => {
 	// ignore Trevor
 	if (message.author.bot) return;
 
+	// run js with !e
+	if (message.content.startsWith("!e") && message.author.username === 'Darren') {
+		evaluate(message);
+	}
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
-	if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i)) {
+	else if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i)) {
 		utOgh(message);
 	}
 	// if you type 
-	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {                         // TODO : UNFUCK ALL THIS
+	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {
 		mimic(message);
 	}
 	// if you type 
@@ -37,6 +45,33 @@ client.on('message', message => {
 
 });
 
+function evaluate(message) {
+
+	const args = message.content.split(" ").slice(1);
+
+	try {
+		const code = args.join(" ");
+		let evaled = eval(code);
+		if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+		message.channel.send(clean(evaled), { code: "xl" });
+	}
+	catch (err) {
+		message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+	}
+
+	function clean(text) {
+		if (typeof text === "string") {
+			return text
+				.replace(/`/g, "`" + String.fromCharCode(8203))
+				.replace(/@/g, "@" + String.fromCharCode(8203));
+		}
+		else {
+			return text;
+		}
+	}
+
+}
+
 function mimic(message) {
 
 	// placeholder
@@ -46,34 +81,38 @@ function mimic(message) {
 
 function mockLast(message) {
 
-	message.channel.fetchMessages({ limit: 2 })
-	.then(lastMessages => {
-		const lastMessage = lastMessages.last().content;
-		if (!lastMessage) return;
-		const mockedMessage = addOs(spongeCase(lastMessage));
-		message.channel.send(mockedMessage);
-	})
-	.catch(console.error);
+	message.channel.fetchMessages({
+			limit: 2
+		})
+		.then(lastMessages => {
+			const lastMessage = lastMessages.last().content;
+			if (!lastMessage) return;
+			const mockedMessage = addOs(spongeCase(lastMessage));
+			message.channel.send(mockedMessage);
+		})
+		.catch(console.error);
 
 }
 
-function mockUser(message) {	
+function mockUser(message) {
 
 	const id = message.mentions.users.first().id;
 
-	message.channel.fetchMessages({ limit: 20 })
-	.then(lastMessages => {
-		lastMessages = Array.from(lastMessages.values());
-		for (let i = 0; i < lastMessages.length; i++) {
-			if (id === lastMessages[i].author.id) {
-				if (!lastMessages[i].content) return;
-				const mockedMessage = addOs(spongeCase(lastMessages[i].content));
-				message.channel.send(mockedMessage);
-				break;
+	message.channel.fetchMessages({
+			limit: 20
+		})
+		.then(lastMessages => {
+			lastMessages = Array.from(lastMessages.values());
+			for (let i = 0; i < lastMessages.length; i++) {
+				if (id === lastMessages[i].author.id) {
+					if (!lastMessages[i].content) return;
+					const mockedMessage = addOs(spongeCase(lastMessages[i].content));
+					message.channel.send(mockedMessage);
+					break;
+				}
 			}
-		}
-	})
-	.catch(console.error);
+		})
+		.catch(console.error);
 
 }
 
@@ -83,18 +122,17 @@ function acceptCriticism(message) {
 
 	if (content.match(/\bgood\s*bot\b/i) && content.match(/\bbad\s*bot\b/i)) {
 		message.channel.send('not today *bucko*');
-	}
-	else if (content.match(/\bgood\s*bot\b/i)) {
+	} else if (content.match(/\bgood\s*bot\b/i)) {
 		message.react('❤');
 		message.channel.send(`thank you ${message.member.displayName} :^)`);
-	}
-	else if (content.match(/\bbad\s*bot\b/i)) {
+	} else if (content.match(/\bbad\s*bot\b/i)) {
 		(async () => {
 			await message.react('🆔');
 			await message.react('🇮');
 			await message.react('🇴');
 			await message.react('🇹');
-		})().catch(console.error);	
+		})()
+		.catch(console.error);
 	}
 
 }
@@ -128,10 +166,11 @@ function spongeCase(str) {
 
 	const r = Math.floor(Math.random() * 2);
 
-	str = str.toLowerCase()
+	str = str
+		.toLowerCase()
 		.split('')
-			.map((v, i) => i % 2 === r ? v : v.toUpperCase())
-				.join('');
+		.map((v, i) => i % 2 === r ? v : v.toUpperCase())
+		.join('');
 
 	return str;
 
@@ -148,16 +187,14 @@ function addOs(str) {
 	if (Math.floor(Math.random() * 100 / addChance) + 1 !== Math.floor(100 / addChance)) {
 		return str;
 	}
-	
+
 	// randomly decide whether to add the O's to the start, end or both ends of the string
 	const startOrEnd = () => {
 		if (Math.floor(Math.random() * 3) === 0) {
 			return 'start';
-		}
-		else if (Math.floor(Math.random() * 3) === 1) {
+		} else if (Math.floor(Math.random() * 3) === 1) {
 			return 'end';
-		}
-		else {
+		} else {
 			return 'both';
 		}
 	};
@@ -172,11 +209,9 @@ function addOs(str) {
 	// return string with O's in appropriate positions
 	if (startOrEnd() === 'start') {
 		return `${generateOs()} ${str}`;
-	}
-	else if (startOrEnd === 'end') {
+	} else if (startOrEnd === 'end') {
 		return `${str} ${generateOs()}`;
-	}
-	else {
+	} else {
 		return `${generateOs()} ${str} ${generateOs()}`;
 	}
 
