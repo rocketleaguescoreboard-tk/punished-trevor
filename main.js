@@ -9,13 +9,13 @@ client.on("warn", e => console.warn(e));
 client.on('message', message => {
 
 	// only I may dance :^)
-	// if (message.author.username !== 'Darren') return;
+	// if (message.author.id !== process.env.me) return;
 
 	// ignore Trevor
 	if (message.author.bot) return;
 
 	// run js with !e
-	if (message.content.startsWith("!e") && (message.author.username === 'Darren' || message.author.username === 'Hectik')) {
+	if (message.content.startsWith("!e") && message.author.id === process.env.me) {
 		evaluate(message);
 	}
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
@@ -27,7 +27,7 @@ client.on('message', message => {
 		mimic(message);
 	}
 	// if you type 
-	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {
+	else if (message.content.match(/^mimic/i) && message.mentions.users.size > 0) {
 		mimicUser(message);
 	}
 	// if you type 'mock' and don't @ anyone:
@@ -90,9 +90,7 @@ function mimic(message) {
 
 function mockLast(message) {
 
-	message.channel.fetchMessages({
-			limit: 2
-		})
+	message.channel.fetchMessages({ limit: 2 })
 		.then(lastMessages => {
 			const lastMessage = lastMessages.last().content;
 			if (!lastMessage) return;
@@ -107,9 +105,7 @@ function mockUser(message) {
 
 	const id = message.mentions.users.first().id;
 
-	message.channel.fetchMessages({
-			limit: 20
-		})
+	message.channel.fetchMessages({ limit: 20 })
 		.then(lastMessages => {
 			lastMessages = Array.from(lastMessages.values());
 			for (let i = 0; i < lastMessages.length; i++) {
