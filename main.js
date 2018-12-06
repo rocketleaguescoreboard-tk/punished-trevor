@@ -8,27 +8,28 @@ client.on("warn", e => console.warn(e));
 
 client.on('message', message => {
 
-	// only I may dance :^)
-	// if (message.author.id !== process.env.me) return;
-
 	// ignore Trevor
 	if (message.author.bot) return;
 
 	// run js with !e
-	if (message.content.startsWith("!e") && message.author.id === process.env.me) {
+	if (message.content.startsWith("!e") && message.channel.id === '517382587090731008') {
 		evaluate(message);
 	}
 	// if someone says 'ut ogh' then say 'ut ogh' right back:
 	else if (message.content.match(/\bu+\s*t+\s*o+\s*g+\s*h+\b/i)) {
 		utOgh(message);
 	}
-	// if you type 
+	// if you type 'mimic', mimic the chat from bits of the last 1,000 messages
 	else if (message.content.match(/^mimic my idiot self$|^mimic$/i)) {
 		mimic(message);
 	}
-	// if you type 
+	// if you type 'mimic @someone', mimic that someone
 	else if (message.content.match(/^mimic/i) && message.mentions.users.size > 0) {
 		mimicUser(message);
+	}
+	// if you type 'mysterymimic', mimic a random person in the chat
+	else if (message.content.match(/^mysterymimic/i)) {
+		mimicMystery(message);
 	}
 	// if you type 'mock' and don't @ anyone:
 	else if (message.content.match(/^mock$/i)) {
@@ -82,6 +83,20 @@ function evaluate(message) {
 }
 
 function mimic(message) {
+
+	// placeholder
+	message.channel.send('miMiC mY iDiOt sElF');
+
+}
+
+function mimicUser(message) {
+
+	// placeholder
+	message.channel.send('miMiC mY iDiOt sElF');
+
+}
+
+function mimicMystery(message) {
 
 	// placeholder
 	message.channel.send('miMiC mY iDiOt sElF');
