@@ -8,8 +8,8 @@ client.on("warn", e => console.warn(e));
 
 client.on('message', message => {
 
-	// ignore Trevor
-	if (message.author.bot) return;
+	// ignore ourself
+	if (message.author.id === '510803012445274112') return
 
 	// run js with !e
 	if (message.content.startsWith("!e") && message.channel.id === '517382587090731008') {
@@ -42,6 +42,10 @@ client.on('message', message => {
 	// if you say 'good bot' or 'bad bot':
 	else if (message.content.match(/\b(good|bad)\s*bot\b/i)) {
 		acceptCriticism(message);
+	}
+	// if you use !play with trevor
+	else if (message.content.startsWith("!play")) {
+		clearQueue(message);
 	}
 
 });
@@ -101,6 +105,10 @@ function mimicMystery(message) {
 	// placeholder
 	message.channel.send('miMiC mY iDiOt sElF');
 
+}
+
+function clearQueue(message) {
+	message.channel.send("!queue clear");
 }
 
 function mockLast(message) {
