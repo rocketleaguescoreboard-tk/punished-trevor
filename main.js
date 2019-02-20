@@ -49,22 +49,18 @@ function slots(message) {
 	const allEmojis = client.emojis.map(v => v.name);
 	const symbols = {};
 	let count = 1;
-	while (Object.keys(symbols).length < difficulty + 1) {
-		const randomEmoji = allEmojis[Math.floor(Math.random() * allEmojis.length) + 1];
+	while (Object.keys(symbols).length < difficulty) {
+		const randomEmoji = allEmojis[Math.floor(Math.random() * allEmojis.length)];
 		if (!Object.values(symbols).includes(randomEmoji)) {
 			symbols[count] = randomEmoji;
 			count++;
 		}
 	}
 
-	console.log('symbols:', symbols);
-
 	// randomly choose 9 emojis to go in each slot
 	const fruits = Array(9)
 		.fill()
 		.map(v => symbols[Math.floor(Math.random() * difficulty) + 1]);
-
-	console.log('fruits:', fruits);
 
 	// check for winning rows
 	let rows = 0;
@@ -77,7 +73,7 @@ function slots(message) {
 
 	// build Embed description string `ascii`
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
-	const ascii = `\n\n🌟🌠🌃🌟🌠\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟🌠🌃🌟🌠\n\n`;
+	const ascii = `\n\n 🌟🌠🌃🌟🌠\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n 🌟🌠🌃🌟🌠\n\n`;
 	
 	// build Embed footer string based on winning rows, if there are any
 	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
