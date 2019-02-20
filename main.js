@@ -87,7 +87,10 @@ function slots(message) {
 		color: 0xFF0000,
 		title: `**${message.member.displayName}** has spun the beans!!!`,
 		description: ascii,
-		footer: {text: result}
+		footer: {
+			icon_url: 'https://cdn.discordapp.com/emojis/513160057312116769.png',
+			text: result
+		}
 	});
 
 	message.channel.send(embed);
