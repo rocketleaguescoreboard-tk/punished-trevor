@@ -74,16 +74,16 @@ function slots(message) {
 		🌟🌠🌃🌟🌠🌃
 		`;
 	
-	const result = rows === 3 ? 'jackpot lol'
-		: diagonals === 2 ? 'X GON GIVE IT TO YA'
-		: rows === 2 ? '2 rows wowee'
-		: rows === 1 || diagonals === 1 ? '3 in a row WAOW!'
-		: 'better luck next time idiot';
+	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
+		: diagonals === 2 ? 'X GON GIVE IT TO YA! TWO DIAGONALS!!!'
+		: rows === 2 ? '2 rows **wowee!!!**'
+		: rows === 1 || diagonals === 1 ? '3 in a row **WAOW!**'
+		: 'better luck next time idiot XD';
 
 	const embed = new Discord.RichEmbed({
 		author: message.member.displayName,
 		color: 0xFF0000,
-		title: `**${message.member.displayName}** has spun the **！ ！ ！ Ｓ Ｌ Ｏ Ｔ Ｓ   Ｏ Ｆ   Ｆ Ａ Ｔ Ｅ ！ ！ ！**`,
+		title: `**${message.member.displayName}** has spun the Ｓ Ｌ Ｏ Ｔ Ｓ   Ｏ Ｆ   Ｆ Ａ Ｔ Ｅ !`,
 		description: ascii,
 		footer: {text: result}
 	});
