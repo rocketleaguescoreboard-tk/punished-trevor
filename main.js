@@ -49,7 +49,7 @@ function slots(message) {
 	const allEmojis = client.emojis.map(v => v.name);
 	const symbols = {};
 	let count = 1;
-	while (emojis.length < difficulty + 1) {
+	while (Object.keys(symbols).length < difficulty + 1) {
 		const randomEmoji = allEmojis[Math.floor(Math.random() * allEmojis.length) + 1];
 		if (!Object.values(symbols).includes(randomEmoji)) {
 			symbols[count] = randomEmoji;
