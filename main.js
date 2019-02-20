@@ -42,19 +42,27 @@ client.on('message', message => {
 
 function slots(message) {
 
-	const symbols = {
-		1: 'clam',
-		2: 'harrythinking',
-		3: 'bean',
-		4: 'mikechonger',
-		5: 'johntasty',
-		6: 'mm'
+	// the number of possible emojis
+	const difficulty = 6;
+
+	// randomly choose n emojis (where n = `difficulty`) from all available to Trevor, and put them in `symbols`
+	const allEmojis = client.emojis.map(v => v.name);
+	const symbols = {};
+	let count = 1;
+	while (emojis.length < difficulty + 1) {
+		const randomEmoji = allEmojis[Math.floor(Math.random() * allEmojis.length) + 1];
+		if (!Object.values(symbols).includes(randomEmoji)) {
+			symbols[count] = randomEmoji;
+			count++;
+		}
 	}
 
+	// randomly choose 9 emojis to go in each slot
 	const fruits = Array(9)
 		.fill()
-		.map(v => symbols[Math.floor(Math.random() * 6) + 1]);
+		.map(v => symbols[Math.floor(Math.random() * difficulty) + 1]);
 
+	// check for winning rows
 	let rows = 0;
 	let diagonals = 0;
 	if (fruits[0] === fruits[1] && fruits[1] === fruits[2]) rows += 1;
@@ -63,19 +71,21 @@ function slots(message) {
 	if (fruits[0] === fruits[4] && fruits[4] === fruits[8]) diagonals += 1;
 	if (fruits[2] === fruits[4] && fruits[4] === fruits[6]) diagonals += 1;
 
+	// build Embed description string `ascii`
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
-
-	const ascii = `\n\n🌟🌟🌟🌟🌟🌟\n\n🌟 ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} 🌟\n\n🌟 ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} 🌟\n\n🌟 ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} 🌟\n\n🌟🌟🌟🌟🌟🌟\n\n`;
+	const ascii = `\n\n🌟🌠🌃🌟🌠\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟🌠🌃🌟🌠\n\n`;
 	
+	// build Embed footer string based on winning rows, if there are any
 	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
 		: diagonals === 2 ? 'X GON GIVE IT TO YA! TWO DIAGONALS!!!'
 		: rows === 2 ? '2 rows!? wowee!!!'
 		: rows === 1 || diagonals === 1 ? '3 in a row! WAOW!'
 		: 'Better luck next time idiot XD';
 
+	// build Embed
 	const embed = new Discord.RichEmbed({
 		color: 0xFF0000,
-		title: `**${message.member.displayName}** has spun the slots!!!`,
+		title: `**${message.member.displayName}** has spun the beans!!!`,
 		description: ascii,
 		footer: {text: result}
 	});
