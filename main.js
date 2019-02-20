@@ -51,7 +51,7 @@ function slots(message) {
 		6: 'bean',
 		7: 'mikechonger',
 		8: 'johntasty',
-		9: 'dallasbeautifulboy'
+		9: 'mm'
 	}
 
 	const fruits = Array(9).fill().map(v => symbols[Math.floor(Math.random() * 9) + 1]);
@@ -66,12 +66,12 @@ function slots(message) {
 
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
 
-	const ascii = `
-		🌟🌠🌃✨🌟✨🌃🌠🌟\n
-		➫ ❚ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ❚ ➫\n
-		➫ ❚ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ❚ ➫\n
-		➫ ❚ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ❚ ➫\n
-		🌟🌠🌃✨🌟✨🌃🌠🌟
+	const ascii = `\n
+		🌟🌠🌃🌟🌠🌃\n
+		➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n
+		➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n
+		➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n
+		🌟🌠🌃🌟🌠🌃
 		`;
 	
 	const result = rows === 3 ? 'jackpot lol'
@@ -83,9 +83,9 @@ function slots(message) {
 	const embed = new Discord.RichEmbed({
 		author: message.member.displayName,
 		color: 0xFF0000,
-		title: `${message.member.displayName} has spun the **!!! S l o t s   o f   F a t e !!!**\n`,
+		title: `**${message.member.displayName}** has spun the **！ ！ ！ Ｓ Ｌ Ｏ Ｔ Ｓ   Ｏ Ｆ   Ｆ Ａ Ｔ Ｅ ！ ！ ！**`,
 		description: ascii,
-		footer: result
+		footer: {text: result}
 	});
 
 	message.channel.send(embed);
