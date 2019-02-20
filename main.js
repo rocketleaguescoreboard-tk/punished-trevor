@@ -84,7 +84,7 @@ function slots(message) {
 
 	// build Embed
 	const embed = new Discord.RichEmbed({
-		color: 0xFF0000,
+		color: 0x41ABFD,
 		title: `**${message.member.displayName}** has spun the beans!!!`,
 		description: ascii,
 		footer: {
