@@ -57,10 +57,14 @@ function slots(message) {
 		}
 	}
 
+	console.log('symbols:', symbols);
+
 	// randomly choose 9 emojis to go in each slot
 	const fruits = Array(9)
 		.fill()
 		.map(v => symbols[Math.floor(Math.random() * difficulty) + 1]);
+
+	console.log('fruits:', fruits);
 
 	// check for winning rows
 	let rows = 0;
