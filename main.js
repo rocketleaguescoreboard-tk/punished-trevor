@@ -67,11 +67,11 @@ function slots(message) {
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
 
 	const ascii = `
-		🌟🌠✭🤩🌃🌟🌠✭🤩🌃🌟🌠✭🤩🌃\n
-		➫ ⦀ ${getEmoji(fruits[0])} ⦀ ${getEmoji(fruits[1])} ⦀ ${getEmoji(fruits[2])} ⦀ ➫\n
-		➫ ⦀ ${getEmoji(fruits[3])} ⦀ ${getEmoji(fruits[4])} ⦀ ${getEmoji(fruits[5])} ⦀ ➫\n
-		➫ ⦀ ${getEmoji(fruits[6])} ⦀ ${getEmoji(fruits[7])} ⦀ ${getEmoji(fruits[8])} ⦀ ➫\n
-		🌟🌠✭🤩🌃🌟🌠✭🤩🌃🌟🌠✭🤩🌃
+		🌟🌠🌃✨🌟✨🌃🌠🌟\n
+		➫ ❚ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ❚ ➫\n
+		➫ ❚ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ❚ ➫\n
+		➫ ❚ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ❚ ➫\n
+		🌟🌠🌃✨🌟✨🌃🌠🌟
 		`;
 	
 	const result = rows === 3 ? 'jackpot lol'
@@ -83,7 +83,7 @@ function slots(message) {
 	const embed = new Discord.RichEmbed({
 		author: message.member.displayName,
 		color: 0xFF0000,
-		title: `${message.member.displayName} has spun the ***!!! S l o t s   o f   F a t e !!!***`,
+		title: `${message.member.displayName} has spun the **!!! S l o t s   o f   F a t e !!!**\n`,
 		description: ascii,
 		footer: result
 	});
