@@ -85,11 +85,11 @@ function slots(message) {
 	// build Embed
 	const embed = new Discord.RichEmbed({
 		color: 0xFF0000,
-		title: `**${message.member.displayName}** has spun the beans!!!`,
+		title: `**${result}**`,
 		description: ascii,
 		footer: {
 			icon_url: 'https://cdn.discordapp.com/emojis/296819423640158219.png',
-			text: result
+			text: `${rows && diagonals ? 'Good job winning lol!' : 'ooft'}`
 		}
 	});
 
