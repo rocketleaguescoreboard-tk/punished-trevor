@@ -44,17 +44,16 @@ function slots(message) {
 
 	const symbols = {
 		1: 'clam',
-		2: 'grizz',
-		3: 'chris',
-		4: 'harrythinking',
-		5: 'uncletony',
-		6: 'bean',
-		7: 'mikechonger',
-		8: 'johntasty',
-		9: 'mm'
+		2: 'harrythinking',
+		3: 'bean',
+		4: 'mikechonger',
+		5: 'johntasty',
+		6: 'mm'
 	}
 
-	const fruits = Array(9).fill().map(v => symbols[Math.floor(Math.random() * 9) + 1]);
+	const fruits = Array(Object.keys(symbols).length)
+		.fill()
+		.map(v => symbols[Math.floor(Math.random() * 9) + 1]);
 
 	let rows = 0;
 	let diagonals = 0;
@@ -72,12 +71,12 @@ function slots(message) {
 		: diagonals === 2 ? 'X GON GIVE IT TO YA! TWO DIAGONALS!!!'
 		: rows === 2 ? '2 rows!? wowee!!!'
 		: rows === 1 || diagonals === 1 ? '3 in a row! WAOW!'
-		: 'better luck next time idiot XD';
+		: 'Better luck next time idiot XD';
 
 	const embed = new Discord.RichEmbed({
 		author: message.member.displayName,
 		color: 0xFF0000,
-		title: `**${message.member.displayName}** has spun the slots!`,
+		title: `**${message.member.displayName}** has spun the slots!!!`,
 		description: ascii,
 		footer: {text: result}
 	});
