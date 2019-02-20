@@ -51,10 +51,9 @@ function slots(message) {
 		6: 'mm'
 	}
 
-	const length = Object.keys(symbols).length;
-	const fruits = Array(length)
+	const fruits = Array(9)
 		.fill()
-		.map(v => symbols[Math.floor(Math.random() * length) + 1]);
+		.map(v => symbols[Math.floor(Math.random() * 6) + 1]);
 
 	let rows = 0;
 	let diagonals = 0;
