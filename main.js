@@ -43,7 +43,7 @@ client.on('message', message => {
 function slots(message) {
 
 	// the number of possible emojis
-	const difficulty = 6;
+	const difficulty = 4;
 
 	// randomly choose n emojis (where n = `difficulty`) from all available to Trevor, and put them in `symbols`
 	const allEmojis = client.emojis.map(v => v.name);
