@@ -73,7 +73,7 @@ function slots(message) {
 
 	// build Embed description string `ascii`
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
-	const ascii = `\n\n 🌟 🌠 🌃 🌟 🌠 🌃\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n 🌟 🌠 🌃 🌟 🌠 🌃 \n\n`;
+	const ascii = `\n\n🌟 🌠 🌃 🌟 🌠 🌃\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟 🌠 🌃 🌟 🌠 🌃 \n\n`;
 	
 	// build Embed footer string based on winning rows, if there are any
 	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
@@ -88,7 +88,7 @@ function slots(message) {
 		title: `**${message.member.displayName}** has spun the beans!!!`,
 		description: ascii,
 		footer: {
-			icon_url: 'https://cdn.discordapp.com/emojis/513160057312116769.png',
+			icon_url: 'https://cdn.discordapp.com/emojis/296819423640158219.png',
 			text: result
 		}
 	});
