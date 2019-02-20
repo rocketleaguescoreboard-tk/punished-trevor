@@ -76,8 +76,8 @@ function slots(message) {
 	
 	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
 		: diagonals === 2 ? 'X GON GIVE IT TO YA! TWO DIAGONALS!!!'
-		: rows === 2 ? '2 rows **wowee!!!**'
-		: rows === 1 || diagonals === 1 ? '3 in a row **WAOW!**'
+		: rows === 2 ? '2 rows!! wowee!!!'
+		: rows === 1 || diagonals === 1 ? '3 in a row! WAOW!'
 		: 'better luck next time idiot XD';
 
 	const embed = new Discord.RichEmbed({
