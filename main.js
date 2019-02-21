@@ -93,7 +93,7 @@ function slots(message) {
 		}
 	});
 
-	message.channel.send(`${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')} **${message.member.displayName}** has spun the beans!!! ${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')}\n\n${embed}`);
+	message.channel.send(embed);
 
 }
 
