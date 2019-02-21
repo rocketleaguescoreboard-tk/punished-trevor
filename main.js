@@ -71,29 +71,33 @@ function slots(message) {
 	if (fruits[0] === fruits[4] && fruits[4] === fruits[8]) diagonals += 1;
 	if (fruits[2] === fruits[4] && fruits[4] === fruits[6]) diagonals += 1;
 
-	// build Embed description string `ascii`
+	// build Embed description string `output`
 	const getEmoji = str => client.emojis.find(v => v.name === str).toString();
-	const ascii = `\n\n🌟 🌠 🌃 🌟 🌠 🌃\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟 🌠 🌃 🌟 🌠 🌃 \n\n`;
+	const output = `\n\n🌟 🌠 🌃 🌟 🌠 🌃\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟 🌠 🌃 🌟 🌠 🌃 \n\n`;
 	
 	// build Embed footer string based on winning rows, if there are any
 	const result = rows === 3 ? '***！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！***'
 		: diagonals === 2 ? '**X GON GIVE IT TO YA!** ***TWO DIAGONALS!!!***'
 		: rows === 2 ? '**2 rows!?** ***wowee!!!***'
-		: rows === 1 || diagonals === 1 ? '  /$$$$$$        /$$$$$$ /$$   /$$        /$$$$$$        /$$$$$$$   /$$$$$$  /$$      /$$\n /$$__  $$      |_  $$_/| $$$ | $$       /$$__  $$      | $$__  $$ /$$__  $$| $$  /$ | $$\n|__/  \\ $$        | $$  | $$$$| $$      | $$  \\ $$      | $$  \\ $$| $$  \\ $$| $$ /$$$| $$\n   /$$$$$/        | $$  | $$ $$ $$      | $$$$$$$$      | $$$$$$$/| $$  | $$| $$/$$ $$ $$\n  |___  $$        | $$  | $$  $$$$      | $$__  $$      | $$__  $$| $$  | $$| $$$$_  $$$$\n /$$  \\ $$        | $$  | $$\\  $$$      | $$  | $$      | $$  \\ $$| $$  | $$| $$$/ \\  $$$\n|  $$$$$$/       /$$$$$$| $$ \\  $$      | $$  | $$      | $$  | $$|  $$$$$$/| $$/   \\  $$\n \\______/       |______/|__/  \\__/      |__/  |__/      |__/  |__/ \\______/ |__/     \\__/'
+		: rows === 1 || diagonals === 1 ? '3 in a row! **WAOW!**'
 		: 'Better luck next time idiot XD';
 
 	// build Embed
 	const embed = new Discord.RichEmbed({
 		color: 0xFDAB41,
 		title: result,
-		description: ascii,
+		description: output,
 		footer: {
 			icon_url: 'https://cdn.discordapp.com/emojis/296819423640158219.png',
 			text: 'bottom text'
 		}
 	});
 
-	message.channel.send(`${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')} **${message.member.displayName}** has spun the beans!!! ${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')}`, embed);
+	// "W I N ! !" in suitably loud ascii letters
+	const ascii = '██╗    ██╗    ██╗    ███╗   ██╗    ██╗    ██╗\n██║    ██║    ██║    ████╗  ██║    ██║    ██║\n██║ █╗ ██║    ██║    ██╔██╗ ██║    ██║    ██║\n██║███╗██║    ██║    ██║╚██╗██║    ╚═╝    ╚═╝\n╚███╔███╔╝    ██║    ██║ ╚████║    ██╗    ██╗\n ╚══╝╚══╝     ╚═╝    ╚═╝  ╚═══╝    ╚═╝    ╚═╝';
+
+	// send the embed along with the ascii if you won
+	message.channel.send(`${rows || diagonals ? ascii : ''}`, embed);
 
 }
 
