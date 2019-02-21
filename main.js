@@ -76,24 +76,24 @@ function slots(message) {
 	const ascii = `\n\n🌟 🌠 🌃 🌟 🌠 🌃\n\n➫ ${getEmoji(fruits[0])} ❚ ${getEmoji(fruits[1])} ❚ ${getEmoji(fruits[2])} ➫\n\n➫ ${getEmoji(fruits[3])} ❚ ${getEmoji(fruits[4])} ❚ ${getEmoji(fruits[5])} ➫\n\n➫ ${getEmoji(fruits[6])} ❚ ${getEmoji(fruits[7])} ❚ ${getEmoji(fruits[8])} ➫\n\n🌟 🌠 🌃 🌟 🌠 🌃 \n\n`;
 	
 	// build Embed footer string based on winning rows, if there are any
-	const result = rows === 3 ? '！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！'
-		: diagonals === 2 ? 'X GON GIVE IT TO YA! TWO DIAGONALS!!!'
-		: rows === 2 ? '2 rows!? wowee!!!'
-		: rows === 1 || diagonals === 1 ? '3 in a row! WAOW!'
+	const result = rows === 3 ? '***！ ！ ！   Ｊ Ａ Ｃ Ｋ Ｐ Ｏ Ｔ   ！ ！ ！***'
+		: diagonals === 2 ? '**X GON GIVE IT TO YA!** ***TWO DIAGONALS!!!***'
+		: rows === 2 ? '**2 rows!?** ***wowee!!!***'
+		: rows === 1 || diagonals === 1 ? '3 in a row! **WAOW!**'
 		: 'Better luck next time idiot XD';
 
 	// build Embed
 	const embed = new Discord.RichEmbed({
 		color: 0xFDAB41,
-		title: `**${message.member.displayName}** has spun the beans!!!`,
+		title: result,
 		description: ascii,
 		footer: {
 			icon_url: 'https://cdn.discordapp.com/emojis/296819423640158219.png',
-			text: result
+			text: 'bottom text'
 		}
 	});
 
-	message.channel.send(embed);
+	message.channel.send(`${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')} **${message.member.displayName}** has spun the beans!!! ${getEmoji('bean')}${getEmoji('bean')}${getEmoji('bean')}\n\n${embed}`);
 
 }
 
