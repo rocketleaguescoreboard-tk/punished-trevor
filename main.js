@@ -17,6 +17,10 @@ client.on('message', message => {
 	if (message.content.startsWith('!e') && message.channel.id === '517382587090731008') {
 		evaluate(message);
 	}
+	// if someone says any variation of "honk":
+	else if (message.content.startsWith('!slots')) {
+		honk(message);
+	}
 	// if someone says '!slots':
 	else if (message.content.startsWith('!slots')) {
 		slots(message);
@@ -39,6 +43,14 @@ client.on('message', message => {
 	}
 
 });
+
+function honk(message) {
+
+	message.channel.send('', {
+		file: 'https://cdn.discordapp.com/attachments/517382587090731008/548543547113078784/pepeliacci.png'
+	});
+
+}
 
 function slots(message) {
 
