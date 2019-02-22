@@ -18,7 +18,7 @@ client.on('message', message => {
 		evaluate(message);
 	}
 	// if someone says any variation of "honk":
-	else if (message.content.startsWith('!slots')) {
+	else if (message.content.match(/h+\s*o+\s*n+\s*k+\s*/i)) {
 		honk(message);
 	}
 	// if someone says '!slots':
