@@ -47,8 +47,9 @@ client.on('message', message => {
 function honk(message) {
 
 	const embed = new Discord.RichEmbed({
+		color: 0x36393F,
 		image: {
-			"url": "https://cdn.discordapp.com/attachments/517382587090731008/548543547113078784/pepeliacci.png"
+			url: "https://i.imgur.com/H8prJzb.png"
 		}
 	});
 
