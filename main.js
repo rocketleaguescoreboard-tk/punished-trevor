@@ -93,8 +93,8 @@ function slots(message) {
 		}
 	});
 
-	// "W I N ! !" in suitably loud ascii letters
-	const ascii = '```██╗    ██╗    ██╗    ███╗   ██╗    ██╗    ██╗\n██║    ██║    ██║    ████╗  ██║    ██║    ██║\n██║ █╗ ██║    ██║    ██╔██╗ ██║    ██║    ██║\n██║███╗██║    ██║    ██║╚██╗██║    ╚═╝    ╚═╝\n╚███╔███╔╝    ██║    ██║ ╚████║    ██╗    ██╗\n ╚══╝╚══╝     ╚═╝    ╚═╝  ╚═══╝    ╚═╝    ╚═╝```';
+	// "W I N !" in suitably loud ascii letters
+	const ascii = '```██╗    ██╗    ██╗    ███╗   ██╗    ██╗\n██║    ██║    ██║    ████╗  ██║    ██║\n██║ █╗ ██║    ██║    ██╔██╗ ██║    ██║\n██║███╗██║    ██║    ██║╚██╗██║    ╚═╝\n╚███╔███╔╝    ██║    ██║ ╚████║    ██╗\n ╚══╝╚══╝     ╚═╝    ╚═╝  ╚═══╝    ╚═╝```';
 
 	// send the embed along with the ascii if you won
 	message.channel.send(`${rows || diagonals ? ascii : ''}`, embed);
