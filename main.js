@@ -20,11 +20,11 @@ client.on('message', message => {
 	// if someone says "good vid":
 /* 	else if (message.content.match(/good vid/ig)) {
 		honk(message);
-	} */
+	}
 	// if someone says "bad vid":
 	else if (message.content.match(/good vid/ig)) {
 		honk(message);
-	}
+	}*/
 	// if someone says any variation of "honk":
 	else if (message.content.match(/^qt\b/i)) {
 		honk(message);
