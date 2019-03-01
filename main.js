@@ -17,6 +17,18 @@ client.on('message', message => {
 	if (message.content.startsWith('!e') && message.channel.id === '517382587090731008') {
 		evaluate(message);
 	}
+	// if someone says "good vid":
+/* 	else if (message.content.match(/good vid/ig)) {
+		honk(message);
+	} */
+	// if someone says "bad vid":
+	else if (message.content.match(/good vid/ig)) {
+		honk(message);
+	}
+	// if someone says any variation of "honk":
+	else if (message.content.match(/^qt\b/i)) {
+		honk(message);
+	}
 	// if someone says any variation of "honk":
 	else if (message.content.match(/\bh+\s*o+\s*n+\s*k+/i)) {
 		honk(message);
@@ -43,6 +55,58 @@ client.on('message', message => {
 	}
 
 });
+
+function goodVidBadVid() {
+	const FileSync = require('lowdb/adapters/FileSync');
+	const db = require('lowdb')(new FileSync('db.json'));
+
+	let ids = {
+		"71612859766800384": 0,
+		"95664974663266304": 0,
+		"116292177033691145": 0,
+		"118839812290641921": 0,
+		"128751450170851328": 0,
+		"129031075602104321": 0,
+		"131898021691523072": 0,
+		"139980309352546304": 0,
+		"141628186290159616": 0,
+		"141628188165013504": 0,
+		"141641930349084672": 0,
+		"147902723843555328": 0,
+		"152726156867665920": 0,
+		"187797774815854592": 0,
+		"193884939660296204": 0,
+		"210155641468223499": 0,
+		"213039894535077889": 0,
+		"224362217766649857": 0,
+		"227178733394591764": 0,
+		"235109631448317954": 0,
+		"249366843360280577": 0,
+		"278398823435468800": 0,
+		"315674333098016799": 0,
+		"480993409386020866": 0
+	};
+
+	Object.keys(ids).forEach(v => {
+		if (!db.has(`vids.${v}`).value()) {
+			db.set(`vids.${v}`, 0).write();
+		}
+	});
+
+	function goodVid(id) {
+		db.update(`vids.${id}`, n => ++n).write();
+	}
+
+	function badVid(id) {
+		db.update(`vids.${id}`, n => --n).write();
+	}
+
+	function getGoons() {
+		return client.channels.find('id', '227159445879259137').members
+			.filter(v => !v.user.bot)
+			.map(v => v.id)
+	}
+}
 
 function honk(message) {
 
