@@ -74,6 +74,9 @@ function goodVidBadVid() {
 		"480993409386020866": 0
 	};
 
+	// const ids = {};
+	// getGoons().forEach(v => ids[v] = 0);
+
 	Object.keys(ids).forEach(v => {
 		if (!db.has(`vids.${v}`).value()) {
 			db.set(`vids.${v}`, 0).write();
@@ -218,7 +221,8 @@ function mockLast(message) {
 			const lastMessage = lastMessages.last().content;
 			if (!lastMessage) return;
 			const mockedMessage = addOs(spongeCase(lastMessage));
-			message.channel.send(mockedMessage);
+			const getEmoji = str => client.emojis.find(v => v.name === str).toString();
+			message.channel.send(`${getEmoji('pepega')} 📣 ${mockedMessage}`);
 		})
 		.catch(console.error);
 
