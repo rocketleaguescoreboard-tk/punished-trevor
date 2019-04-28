@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const util = require('util');
 const client = new Discord.Client();
+const { token } = require('./settings');
 
-client.login(process.env.BOT_TOKEN);
+client.login(token);
 
 client.on('error', e => console.error(e));
 
