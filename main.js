@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const util = require('util');
 const client = new Discord.Client();
 const { token } = require('./settings');
+//const { token } = 'NTYzMTU0NjUzNjgwODkzOTUz.XKVM8Q.oz5e4vjwj-TtkU3jM4IJjix7WOg';
 
 client.login(token);
 
