@@ -10,12 +10,20 @@ client.on('error', e => console.error(e));
 client.on('warn', e => console.warn(e));
 
 client.on('message', message => {
+	if (message.channel.id === '563156152477548567' && message.content.startsWith('ping')) { 
+		message.channel.send(':rotating_light:\n:rotating_light:');
+	}
+	
+	// stopping testing trevor from acting up
+	return;
 
 	// ignore Trevor
 	if (message.author.id === '510803012445274112') return;
 
+	else if (message.author.id === '563154653680893953') return;
+
 	// run js with !e
-	if (message.content.startsWith('!e') && message.channel.id === '517382587090731008') {
+	else if (message.content.startsWith('!e') && message.channel.id === '517382587090731008') {
 		evaluate(message);
 	}
 	else if (message.content.match(/h+\s*o+\s*n+\s*k+/i)) {
@@ -41,7 +49,45 @@ client.on('message', message => {
 	else if (message.content.match(/\b(good|bad)\s*bot\b/i)) {
 		acceptCriticism(message);
 	}
+});
 
+// Initialize the invite cache, this will be used to publicly shame Dallas
+const invites = {};
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+	wait(1000);
+
+	// Load all invites for all guilds and saved them
+	client.guilds.forEach(g => {
+		g.fetchInvites().then(guildInvites => {
+			invites[g.id] = guildInvites;
+		});
+	});
+});
+
+client.on('guildMemberAdd', member => {
+	// Send the message to a designated channel on a server:
+	const channel = member.guild.channels.find(ch => ch.name === 'goonz');
+	// Do nothing if the channel wasn't found on this server
+	if (!channel) return;
+	// To compare, we need to load the current invite list.
+	member.guild.fetchInvites().then(guildInvites => {
+		// This is the existing invites for the guild.
+		const ei = invites[member.guild.id];
+		// Update the cached invites for the guild.
+		invites[member.guild.id] = guildInvites;
+		// Look through the invites, find the one for which the uses went up.
+		const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+		// This is just to simply the message being sent below
+		const inviter = client.users.get(invite.inviter.id);
+		// Get the log channel
+		const logChannel = member.guild.channels.find(channel => channel.name === "goonz");
+		// If the inviter was Dallas, publicly shame him
+		if (inviter.id === '187797774815854592'){
+			logChannel.send(':rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n     __**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n     **DALLAS SKAU HAS INVITED** \n      **YET ANOTHER PERSON TO** \n        **OUR DISCORD CHANNEL** \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:');
+		}
+	});
 });
 
 function goodVidBadVid() {
