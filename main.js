@@ -10,16 +10,14 @@ client.on('error', e => console.error(e));
 client.on('warn', e => console.warn(e));
 
 client.on('message', message => {
-	if (message.channel.id === '563156152477548567' && message.content.startsWith('ping')) { 
+	/*if (message.channel.id === '563156152477548567' && message.content.startsWith('ping')) { 
 		message.channel.send(':rotating_light:\n:rotating_light:');
-	}
+	}*/
 	
-	// stopping testing trevor from acting up
-	return;
-
 	// ignore Trevor
 	if (message.author.id === '510803012445274112') return;
 
+	// ignore other Trevor
 	else if (message.author.id === '563154653680893953') return;
 
 	// run js with !e
