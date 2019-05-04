@@ -47,6 +47,11 @@ client.on('message', message => {
 	else if (message.content.match(/\b(good|bad)\s*bot\b/i)) {
 		acceptCriticism(message);
 	}
+	// This function should always be last, only firing if other functions haven't triggered.
+	// if Mike comments, potentially react to message
+	else if (message.author.id === '141641930349084672') {
+		poopMike(message);
+	}
 });
 
 // Initialize the invite cache, this will be used to publicly shame Dallas
@@ -374,4 +379,18 @@ function addOs(str) {
 	// return string with O's in appropriate positions
 	return `${generateOs()} ${str} ${ends === 'start' ? generateOs() : ''}`;
 
+}
+
+// randomly decided whether to poop on Mike
+function poopMike(message) {
+	const addChance = 2;
+	const randomNum = (Math.random() * 100);
+
+	// Determine whether to poop Mike or not
+	if (randomNum >= addChance) {
+		// If result is greater than likelihood, end.
+		return;
+	}
+	// poop on Mike
+	message.react('💩');
 }

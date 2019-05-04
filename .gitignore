@@ -1,3 +1,5 @@
 node_modules/
 settings.json
+settings.json.testing
+settings.json.real
 index.js.disabled
