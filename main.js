@@ -88,9 +88,9 @@ client.on('guildMemberAdd', member => {
 		const logChannel = member.guild.channels.find(channel => channel.name === "goonz");
 		// Add the user to a specific discord role and alert channel of user addition.
 		member.addRole('477269695779700757')
-			.then(console.info(`${member.user.username} added to fools group`))
-			.catch(console.error(`${member.user.username} was not added to fools group`));
-		logChannel.send(`:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n__**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n${invite.inviter.username} has invited \nsome absolute fool named \n${member.user.username} to our \nblessed discord channel\n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:`);
+			.then(() => console.info(`${member.user.username} added to fools group`))
+			.catch(() => console.error(`${member.user.username} was not added to fools group`));
+		logChannel.send(`:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n    __**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n    ${invite.inviter.username} has invited \n    some absolute fool named \n    ${member.user.username} to our \n    blessed discord channel\n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:`);
 	});
 });
 
@@ -384,7 +384,7 @@ function addOs(str) {
 
 // randomly decided whether to poop on Mike
 function poopMike(message) {
-	const addChance = 4;
+	const addChance = 2;
 	const randomNum = (Math.random() * 100);
 
 	// Determine whether to poop Mike or not
