@@ -10,9 +10,9 @@ client.on('error', e => console.error(e));
 client.on('warn', e => console.warn(e));
 
 client.on('message', message => {
-	/*if (message.channel.id === '563156152477548567' && message.content.startsWith('ping')) { 
-		message.channel.send(':rotating_light:\n:rotating_light:');
-	}*/
+	if (message.channel.id === '563156152477548567' && message.content.startsWith('ping')) { 
+		message.channel.send('pong');
+	}
 	
 	// ignore Trevor
 	if (message.author.id === '510803012445274112') return;
@@ -86,10 +86,11 @@ client.on('guildMemberAdd', member => {
 		const inviter = client.users.get(invite.inviter.id);
 		// Get the log channel
 		const logChannel = member.guild.channels.find(channel => channel.name === "goonz");
-		// If the inviter was Dallas, publicly shame him
-		if (inviter.id === '187797774815854592'){
-			logChannel.send(':rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n     __**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n     **DALLAS SKAU HAS INVITED** \n      **YET ANOTHER PERSON TO** \n        **OUR DISCORD CHANNEL** \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:');
-		}
+		// Add the user to a specific discord role and alert channel of user addition.
+		member.addRole('477269695779700757')
+			.then(console.info(`${member.user.username} added to fools group`))
+			.catch(console.error(`${member.user.username} was not added to fools group`));
+		logChannel.send(`:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n__**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n${invite.inviter.username} has invited \nsome absolute fool named \n${member.user.username} to our \nblessed discord channel\n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:`);
 	});
 });
 
