@@ -9,7 +9,7 @@ WORKDIR /usr/src/bot
 # Copy and install bot
 COPY package.json /usr/src/bot
 RUN npm install
-RUN echo '{ "token" : "'"$token"'" }' > settings.json
+RUN echo '{ "token" : "'"$token"'" }' > secret_settings.json
 COPY . /usr/src/bot
 
 # Start bot

@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
 const util = require('util');
 const client = new Discord.Client();
-const { token } = require('./settings');
+const { token } = require('./secret_settings');
+// to add additional fields, include them in settings.json, then add below like:
+// fools_rule, field2
+const { fools_rule } = require('./settings');
 
 client.login(token);
 
@@ -87,7 +90,7 @@ client.on('guildMemberAdd', member => {
 		// Get the log channel
 		const logChannel = member.guild.channels.find(channel => channel.name === "goonz");
 		// Add the user to a specific discord role and alert channel of user addition.
-		member.addRole('477269695779700757')
+		member.addRole(`${fools_role}`)
 			.then(() => console.info(`${member.user.username} added to fools group`))
 			.catch(() => console.error(`${member.user.username} was not added to fools group`));
 		logChannel.send(`:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:\n    __**ALERT**__ @everyone __**ALERT**__ \n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: \n    ${invite.inviter.username} has invited \n    some absolute fool named \n    ${member.user.username} to our \n    blessed discord channel\n:rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:`);
