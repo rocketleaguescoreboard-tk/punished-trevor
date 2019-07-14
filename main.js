@@ -390,14 +390,14 @@ function poopMike(message) {
 	const thumbChance = 0.1;
 	const randomNum = (Math.random() * 100);
 
-	if (randomNum <= poopChance) {
+	if (randomNum <= thumbChance) {
+		// thumbs up mike	
+		message.react('👍');
+		console.info("Mike's been thumbed");
+	} else if (randomNum <= poopChance) {
 		// poop on mike
 		message.react('💩');
 		console.info("Mike's been pooped");
-	} else if(randomNum <= thumbChance) {
-		// thumbs up mike
-		message.react('👍');
-		console.info("Mike's been thumbed");
 	} else {
 		console.info("Mike has escaped pooping and thumbing.");
 	}
