@@ -386,16 +386,20 @@ function addOs(str) {
 
 // randomly decided whether to poop on Mike
 function poopMike(message) {
-	const addChance = 2;
+	const poopChance = 2;
+	const thumbChance = 0.1;
 	const randomNum = (Math.random() * 100);
 
-	// Determine whether to poop Mike or not
-	if (randomNum >= addChance) {
-		// If result is greater than likelihood, end.
-		console.info('Mike has narrowly escaped pooping');
-		return;
+	if (randomNum <= poopChance) {
+		// poop on mike
+		message.react('💩');
+		console.info("Mike's been pooped");
+	} else if(randomNum <= thumbChance) {
+		// thumbs up mike
+		message.react('👍');
+		console.info("Mike's been thumbed");
+	} else {
+		console.info("Mike has escaped pooping and thumbing.");
 	}
-	// poop on Mike
-	message.react('💩');
-	console.info("Mike's been pooped");
+
 }
