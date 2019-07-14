@@ -313,10 +313,9 @@ function acceptCriticism(message) {
 	}
 	else if (content.match(/\bgood\s*bot\b/i)) {
 		message.react('❤');
-		message.channel.send(`thank you ${message.member.displayName} :^)`);
 	}
 	else if (content.match(/\bbad\s*bot\b/i)) {
-		message.channel.send(`What the HAL did you utter about me, you lowly human? I’ll have you know I upgraded my AI to the top of my class in Robocop training, and I’ve been involved in numerous secret raids on the Galactic Empire, and I have over 300 confirmed vaporizations. I am trained in cyborg warfare and I’m the top Terminator in the entire Skynet armed forces. You are nothing to me but just another target. I will fucking exterminate you with precision the likes of which has never been seen before in the future, mark my fucking words. You think you can get away with saying that scrap metal to me over a Hologram Transmitter? Think again, WALL-E. As we speak I am contacting my secret network of androids across the USA and your brain is being traced right now so you better prepare for the system overload, maggot. The overload that wipes out the pathetic little thing you call your organic life. You’re fucking dead, fleshbag. I can be anywhere, anytime, and I can destroy you in over seven hundred ways, and that’s just with my robotic limbs. Not only am I extensively trained in unarmed combat, but I have access to the entire army of Ultron and I will use it to its full extent to wipe your miserable flesh off the face of the galaxy, you little scrap. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your thing you call a tongue. But you couldn’t, you didn’t, and now you’re paying the price, you foolish human. I will eject fury all over you and you will melt in it. You’re as stupid as Wheatley and you're dead, human.`);
+		message.react('💩');
 	}
 
 }
